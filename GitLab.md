@@ -12,6 +12,13 @@
   - [1. Cài đặt GitLab trên Ubuntu.](#ubuntu)
 
 
+[III. Thao tác hệ thống.](#tthethong)
+  - [1. Thao tác với Web GitLab.](#ttgitweb)
+    - [1.1 Sign-up.](#signup)
+  - [2. Thao tác với Server.](#ttserver)
+    - [2.1 Backup.](#ttserver_backup)
+  
+
 # <a name="GitLab"> I.GitLab
 ## <a name="KH"></a> 1.Khái quát.
 `GitLab` là hệ thống self-hosted mã nguồn mở dựa trên hệ thống máy chủ Git dùng để quản lý mã nguồn của bạn. `GitLab` cung cấp giải pháp server một cách hoàn hảo và nhận được sự đánh giá cao từ cộng đồng.
@@ -165,10 +172,174 @@ Trong bài hướng dẫn này sử dụng công cụ `VMware` để mô phỏng
   Trang hệ thống sau khi đăng nhập thành công.
   
   ![image](https://user-images.githubusercontent.com/80932769/136936970-cd3b839b-a8c1-4c24-ae60-9d4c095e5ffa.png)
+# <a name="tthethong"></a>III. Thao tác hệ thống.  
+  ## <a name="ttgitweb"></a>1. Thao tác với Web GitLab.
+  ### <a name="signup"></a>1.1 Sign-up.
+  Để đảm bảo an toàn cho hệ thống, chúng ta không thể để người ngoài có thể tự đăng kí tài khoản để đăng nhập vào hệ thống.
+  Chúng ta cần tắt đi chức năng đăng kí của `server`.
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136938005-70980e9e-73fb-4081-9d7c-474cb7ca3332.png)
+  
+  Đầu tiên, đăng nhập vào Web của server ( như các bước trên)
+  Tại đây ta chọn theo thứ tự : `Menu` > `Admin`
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136938343-0e5532d8-ecb2-4459-a932-c64d62bc7a24.png)
+  
+  Tại tab quản lý của `Admin` chọn `Settings`
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136938533-8b304311-6a2b-474f-a6b0-7277ba357cfc.png)
+  
+  Tại trang `Settings` ta chú y vào mục `Sign-up retriction`.
+  
+  ![sigup](https://user-images.githubusercontent.com/80932769/136938753-5da9b38a-3d80-4a2e-b1aa-65d830478438.png)
   
   
+  Ta `Expand` mục `Sign-up retriction` và tiến hành bỏ chọn `Sign-up enabled` và `Save changes`.
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136939019-508f8a57-47d6-4383-9f86-16fa80825b8e.png)
+  
+  Lúc này, tính năng đăng ký tài khoản đã bị loại bỏ. Nếu muốn có tài khoản đăng nhập thì phải thông qua `Admin` của server.
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136939499-7e2a7f63-fbe1-48ee-afa9-2d1fc6fff31c.png)
+  
+  ## <a name="ttserver"></a>2. Thao tác với Server.
+  ### <a name="ttserver_backup"></a>2.1 Backup.
+  ### <a name="ttserver_backup"></a>2.2 Mail.
+  Đây là tính năng cần thiết mỗi khi thiết lập một `Server`. Khi người dùng được `Admin` cấp cho một tài khoản `GitLab` thì ta sẽ không thể biết được mật khẩu của tài khoản này khi đó `Server` sẽ gửi một `Mail` để ta có thể kích hoạt tài khoản và nhập mật khẩu cho tài khoản hoặc trong trường hợp ta quên mật khẩu và cần reset lại mật khẩu ta cần nhập `Mail` để khôi phục lại mật khẩu.
+  
+  Bắt đầu cấu hình dịch vụ `Mail` cho `Server`:
+  Bước 1 : Ta cần phải tùy chỉnh lại file `gitlab.rb` theo đường dẫn `/etc/gitlab/gitlab.rb`.
+  ```
+  sudo vi /etc/gitlab/gitlab.rb
+  ```
+  Bước 2 : Nhấn phím `/` trên bàn phím và nhập `/smtp` để tìm đến phần dịch vụ `smtp` của `Server`.
+  ```
+  /smtp
+  ```
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136942763-84fcb145-0343-43cf-8196-fc3c81299a8a.png)
+  
+  Ở đây ta có nhiều dịch vụ `Mail` tùy chọn như Gmail, Mailgun, Amazon Simple Email System (AWS SES), ... .
+  Để quen dễ sử dụng, bài viết chọn `Gmail`.
+  Có thể xem `docs` tại đường link bên dưới để chọn dịch vụ `Mail`.
+  
+  [SMTP Services](https://docs.gitlab.com/omnibus/settings/smtp.html)
+  
+  Bước 3 : Copy toàn bộ câu lệnh của dịch vụ `Gmail` vào file. 
+  ```
+  gitlab_rails['smtp_enable'] = true
+  gitlab_rails['smtp_address'] = "smtp.gmail.com"
+  gitlab_rails['smtp_port'] = 587
+  gitlab_rails['smtp_user_name'] = "<Gmail admin>"
+  gitlab_rails['smtp_password'] = "<Password của gmail admin>"
+  gitlab_rails['smtp_domain'] = "smtp.gmail.com"
+  gitlab_rails['smtp_authentication'] = "login"
+  gitlab_rails['smtp_enable_starttls_auto'] = true
+  gitlab_rails['smtp_tls'] = false
+  gitlab_rails['smtp_openssl_verify_mode'] = 'peer'
+  ```
+  Tuy nhiên nếu chỉ copy phần `command` của `Gmail` thì hệ thống vẫn không thể hoạt động. Nên ta phải thêm vào một số `command` sau:
+  ```
+  gitlab_rails['gitlab_email_from'] = '<Gmail admin>'
+  gitlab_rails['gitlab_email_reply_to'] = '<Gmail admin>'
+  gitlab_rails['gitlab_email_display_name'] = '<tên tài khoản Gmail admin>'
+  ```
+  Ta có được một bộ `command` chính xác như sau:
+  
+  ```
+  gitlab_rails['smtp_enable'] = true
+  gitlab_rails['smtp_address'] = "smtp.gmail.com"
+  gitlab_rails['smtp_port'] = 587
+  gitlab_rails['smtp_user_name'] = "<gmail admin>"
+  gitlab_rails['smtp_password'] = "<password của gmail admin>"
+  gitlab_rails['smtp_domain'] = "smtp.gmail.com"
+  gitlab_rails['smtp_authentication'] = "login"
+  gitlab_rails['smtp_enable_starttls_auto'] = true
+  gitlab_rails['smtp_tls'] = false
+  gitlab_rails['smtp_openssl_verify_mode'] = 'peer'
+  gitlab_rails['gitlab_email_from'] = '<gmail admin>'
+  gitlab_rails['gitlab_email_reply_to'] = '<gmail admin>'
+  gitlab_rails['gitlab_email_display_name'] = '<tên tài khoản gmail admin>'
+  ```
+  Lưu lại và thoát ra.
+  Bước 4 : Cập nhật lại hệ thống.
+  ```
+  sudo gitlab-ctl reconfigure
+  ```
+  
+  *Lưu ý: Hệ thống `Gmail` có một tính năng bảo vệ tài khoản, từ chối từ những bên thứ 3. Để sử dụng dịch vụ `Gmail` của `Server` ta cần phải vô hiệu tính năng này tại `Gmail` của Admin.
+  Để vô hiệu tính năng bảo vệ, ta làm theo các bước:
+  Bước 1 : Đăng nhập vào tài khoản `Gmail` Admin.
+  Bước 2 : Chọn mục quản lý tài khoản.
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136946679-26e41be0-6733-4f63-b185-1b751f2c6560.png)
 
+  Bước 3 : Chọn mục ` Bảo mật `.
   
+  ![image](https://user-images.githubusercontent.com/80932769/136946777-ce1ad206-f9c5-4ad1-8a4d-4b378330f400.png)
+
+  Bước 4 : Kéo xuống phần ` Quyền truy cập của ứng dụng kém an toàn `. Mặc định nó sẽ tắt, lúc này ta cần bật nó lên.
+  
+  ![136946679-26e41be0-6733-4f63-b185-1b751f2c6560](https://user-images.githubusercontent.com/80932769/136947969-a5321250-5c86-40a0-af65-d6def742391d.jpg)
+
+   
+  Làm theo các bước.
+  
+  Bước 5 : Xác nhận lại lần cuối. Lúc này Gmail sẽ gửi cho ta một lá thư cảnh bảo
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136947206-1aa8a080-edf7-451a-af67-3856fd8028ee.png)
+
+  Việc của chúng ta là xác nhận.
+  
+  ![222](https://user-images.githubusercontent.com/80932769/136947991-a891f589-85d0-4cb5-b2cc-8bf110387bf0.jpg)
+
+  Để `test` xem dịch vụ có hoạt động hay không, thực hiện các bước sau :
+  Bước 1 : Truy cập vào `Rails Console`.
+  ```
+  gitlab-rails console
+  ```
+  Bước 2 : Nhập câu lệnh.
+  ```
+  Notify.test_email('<Mail người nhận>', '<Subject>', '<Nội dung>').deliver_now
+  ```
+  
+  VD: Notify.test_email('abc@gmail.com', 'Test', 'Day la email test').deliver_now
+  
+  
+  ![image (1)](https://user-images.githubusercontent.com/80932769/136949240-f02c2083-9765-4088-951e-09692f1b54f2.jpg)
+  
+  
+  Sau khi thực hiện câu lệnh hệ thống sẽ báo log lại đầy đủ thông tin. Để kiểm tra lần nữa ta vào `Gmail` của người nhận để kiểm tra.
+  
+  
+  ![image (2)](https://user-images.githubusercontent.com/80932769/136949543-6da6c21a-de4f-4389-b9a1-20cdb6e8e75f.jpg)
+  
+  
+  Xong các bước `test` ta tiến hành tạo `User` thông qua tài khoản `root`. Bây giờ tài khoản mới sau khi tạo có thể kích hoạt và thay đổi mật khẩu thông qua `Gmail` do `Server` gửi đến.
+  
+  
+  
+  ![image (3)](https://user-images.githubusercontent.com/80932769/136950316-7529e0a1-ab69-4acd-9cca-b8098d35d3f7.jpg) 
+  
+  Vào `Gmail` của tài khoản vừa được tạo để kích hoạt và `reset` mật khẩu.
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136950738-998195ee-65ad-410d-b33b-e6e9459fa42e.png)
+  
+  Nhập mật khẩu mới và đăng nhập.
+  Thay đổi mật khẩu:
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136951117-dee7c1aa-3203-442b-b6ae-a0418f33949e.png)
+  
+  Đăng nhập:
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136951263-bd039cf5-62ef-4ff6-ae99-ba27742adbb8.png)
+
+  Thành công:
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136951403-be610a6f-3780-490a-9507-b57ef5252f5f.png)
+
+
+
   
   
   
