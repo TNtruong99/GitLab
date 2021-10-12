@@ -55,3 +55,6 @@ Cho phép đọc hoặc ghi vào `repository` và các `branches`. `Protected br
 - `GitLab-shell`: là loại thứ ba của worker, thực hiện nhiệm vụ tạo các đơn đặt hàng từ một máy fax (SSH) thay vì front-desk (HTTP). GitLab-shell giao tiếp với Sidekiq qua Redis và hỏi những câu hỏi nhanh của Unicorn worker hoặc trực tiếp hoặc qua front-desk.
 - `GitLab enterprise edition` là tập hợp các quy trình và hoạt động kinh doanh được điều hành bởi office.
 ##### 2.4.System layout.
+`Repositories` bare trong đường dẫn `/home/git/repositories`. `Gitlab` là một ứng dụng được viết bằng ngôn ngữ ruby on rails. Do đó, để biết rõ các hoạt động bên trong bạn có thể tìm hiểu về hoạt động của ruby on rails.
+
+Ứng dụng GitLab-shell được cài đặt tại thư mục: `home/git/gitlab-shell` cho phép sử dụng kho dữ liệu qua SSH.
