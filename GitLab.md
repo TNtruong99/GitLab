@@ -154,6 +154,20 @@ Trong bài hướng dẫn này sử dụng công cụ `VMware` để mô phỏng
   ```
   exit
   ```
+  Sau khi `exit` thực hiện khởi động lại server để hệ thống cập nhật những thay đổi:
+  ```
+  sudo gillab-ctl reconfigure
+  ```
+  Tiến hành đăng nhập vào vào hệ thống trên web `192.168.15.130`.
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136936831-d5826473-b28c-4f9a-a693-ba109c1ece32.png)
+
+  Trang hệ thống sau khi đăng nhập thành công.
+  
+  ![image](https://user-images.githubusercontent.com/80932769/136936970-cd3b839b-a8c1-4c24-ae60-9d4c095e5ffa.png)
+  
+  
+
   
   
   
