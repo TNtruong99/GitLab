@@ -1,7 +1,7 @@
 # GITLAB
 ## Mục lục.
 - [GitLab](#GitLab)
-  - [KH](1.Khái quát)
+  - [KH](#1.Khái quát)
 - 
 
 
