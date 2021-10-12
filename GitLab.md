@@ -24,7 +24,7 @@
 - `Gitlab community edition` (`CE`) là phiên bản cộng đồng, mã nguồn mở, cung cấp qua Git từ kho lưu trữ chứa GitLab. Bản mới nhất của `GitLab` được các nhà phát triển release tại các nhánh stable và nhánh master.
 - GitLab enterprise edition (`EE`) là Gitlab phiên bản doanh nghiệp, có sẵn không lâu sau khi phát hành bản `CE`, được cung cấp từ kho lưu trữ của `gitlab.com`. Khi một doanh nghiệp đăng ký `GitLab` sẽ nhận được sự support của `GitLab` BV khi gặp khó khăn trong quá trình cài đặt và sử dụng.
 - `itlab continuous integration` (`CI`) là một giải pháp tích hợp được thực hiện bởi nhóm phát triển `Gitlab`.
-### <a name="Pb"></a>2.2.Protected branches.![1231](https://user-images.githubusercontent.com/80932769/136925799-8d837af0-66fb-42cf-a62d-cc8230a3e3fe.png)
+### <a name="Pb"></a>2.2.Protected branches.
 
 Cho phép đọc hoặc ghi vào `repository` và các `branches`. `Protected branches` cấp quyền cho những người được phép commit và pushing code. Một protected branch gồm 3 điều cơ bản sau:
 - Ngăn chặn việc push từ tất cả mọi người trừ user và master.
@@ -67,9 +67,6 @@ Trong bài hướng dẫn này sử dụng công cụ `VMware` để mô phỏng
   Cài dịch vụ:
   ```
   sudo apt install -y ca-certificates curl openssh-server
-  
-  <img src=https://imgur.com/5mUhyKM></img>
-  ![1231](https://user-images.githubusercontent.com/80932769/136925700-1b8dcf4a-2fff-4b50-9f89-660ffccb61d0.png)
   ![1231](https://user-images.githubusercontent.com/80932769/136925825-5df49320-00cf-4990-bd64-574baf4943ed.png)
 
 
