@@ -1,7 +1,7 @@
 # GITLAB
 ## Mục lục.
 - [GitLab](#GitLab)
-  - [KH](#1.Khái quát)
+  - [Khái quát](#kh)
 - 
 
 
@@ -15,7 +15,7 @@
 
 
 
-### <a name="1.Khái quát"></a>KHÁI quát
+### <a name="kh"></a>KHÁI quát
 123123
 
 
