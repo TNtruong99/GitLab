@@ -1,6 +1,6 @@
 # GITLAB
 ## Mục lục.
-[GitLab](# IGitLab)
+[GitLab](#IGitLab)
 
 
 
