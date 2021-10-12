@@ -1,6 +1,6 @@
 # GITLAB
-## Mục lục
-[GitLab](### GitLab)
+## Mục lục.
+[GitLab](# GitLab)
 
 
 
