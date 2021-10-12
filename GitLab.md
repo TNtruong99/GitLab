@@ -67,7 +67,9 @@ Trong bài hướng dẫn này sử dụng công cụ `VMware` để mô phỏng
   Cài dịch vụ:
   ```
   sudo apt install -y ca-certificates curl openssh-server
+  
   ![1231](https://user-images.githubusercontent.com/80932769/136925825-5df49320-00cf-4990-bd64-574baf4943ed.png)
+  
 
 
 
