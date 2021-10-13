@@ -34,6 +34,7 @@
   ![image](https://user-images.githubusercontent.com/80932769/137051055-01c9e856-9df3-4d4b-8b0d-5b9efdc61d0d.png)
 
   ### `Backup` dữ liệu của server.
+  
   Ta sẽ dùng chung folder `backups` của bước trên.
   Bước 1 : Tạo  folder`data` và  `backup` theo đường dẫn data/backups.
   ```
