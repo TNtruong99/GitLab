@@ -8,7 +8,7 @@
 [< Mục lục.](https://github.com/TNtruong99/GitLab/blob/main/GitLab.md)
 
 ## 2. Thao tác với Server.
-### <a name="backup"></a>2.1 Backup.
+## <a name="backup"></a>2.1 Backup.
   
   `Backup` là một trong những vấn đề đáng lưu ý nhất khi làm việc vì khi làm việc có thể xảy ra nhiều lỗi gây mất dữ liệu, việc `backup` giúp ta có thể khôi phục lại hệ thống. Khi làm việc với `GitLab` dữ liệu của chúng ta sẽ phình to ra trong quá trình làm việc mà những phân vùng `root` lại thường có sức chứa khá nhỏ. Đó là lý do chúng ta nên chuyển dữ liệu `backup` ra một phân vùng khác cũng rất quan trọng.
   
@@ -16,7 +16,7 @@
   - Bước 1 : `backup` những file cấu hình quan trọng của server.
   - Bước 2 : `backup` dữ liệu của server.
   
-  #### `Backup` những file cấu hình của server.
+  ### `Backup` những file cấu hình của server.
   Bước 1 : Tạo một `folder` tại vị trí mà ta muốn lưu file `backup`.
   VD: Tạo `folder` **/home/truongtn/data/backups** để lưu dữ liệu tại đây.
   
@@ -31,7 +31,7 @@
   
   ![image](https://user-images.githubusercontent.com/80932769/137051055-01c9e856-9df3-4d4b-8b0d-5b9efdc61d0d.png)
 
-  #### `Backup` dữ liệu của server.
+  ### `Backup` dữ liệu của server.
   Ta sẽ dùng chung folder `backups` của bước trên.
   Bước 1 : Truy cập vào file `gitlab.rb`.
   ```
@@ -119,8 +119,8 @@
   
   
 
-  ### <a name="restore"></a>2.2 Restore.
-  ### <a name="mail"></a>2.3 Mail.
+  ## <a name="restore"></a>2.2 Restore.
+  ## <a name="mail"></a>2.3 Mail.
   Đây là tính năng cần thiết mỗi khi thiết lập một `Server`. Khi người dùng được `Admin` cấp cho một tài khoản `GitLab` thì ta sẽ không thể biết được mật khẩu của tài khoản này khi đó `Server` sẽ gửi một `Mail` để ta có thể kích hoạt tài khoản và nhập mật khẩu cho tài khoản hoặc trong trường hợp ta quên mật khẩu và cần reset lại mật khẩu ta cần nhập `Mail` để khôi phục lại mật khẩu.
   
   Bắt đầu cấu hình dịch vụ `Mail` cho `Server`:
