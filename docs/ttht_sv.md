@@ -35,22 +35,27 @@
 
   ### `Backup` dữ liệu của server.
   Ta sẽ dùng chung folder `backups` của bước trên.
-  Bước 1 : Truy cập vào file `gitlab.rb`.
+  Bước 1 : Tạo  folder`data` và  `backup` theo đường dẫn data/backups.
+  ```
+  mkdir -p data/backups
+  ```
+  Bước 2 : Truy cập vào file `gitlab.rb`.
   ```
   sudo vi /etc/gitlab/gitlab.rb
   ```
-  Bước 2 : Nhấn `/` và nhập `backup` tìm đến vị trí đường dẫn `backup`.
+  Bước 3 : Nhấn `/` và nhập `backup` tìm đến vị trí đường dẫn `backup`.
   ```
   /backup
   ```
   
   ![image](https://user-images.githubusercontent.com/80932769/137049761-d360aab8-61bc-492b-99f3-a12a1a96a002.png)
 
-  Đây là đường dẫn mặc định của file `backup` việc của chúng ta là thay đổi đường dẫn này đến vị trí folder mà ta đã tạo ở trên.
+  Đây là đường dẫn mặc định của file `backup` việc của chúng ta là thay đổi đường dẫn này đến vị trí folder mà ta đã tạo ở trên `/data/backups`.
   
   Bước 3 : Thay đổi đường dẫn.
   
-  ![image](https://user-images.githubusercontent.com/80932769/137049895-08358af0-2cc6-417d-bade-b6512ebb0c59.png)
+  ![image](https://user-images.githubusercontent.com/80932769/137058962-be6274d5-7723-4549-b2bb-2563460c8a27.png)
+
 
   Bước 4 : Cập nhật lại hệ thống.
   ```
@@ -101,12 +106,28 @@
   
   Để tìm hiểu chi tiết, có thể đọc tại : [GitLab backup and restore](https://docs.gitlab.com/ee/raketasks/backup_restore.html)
   
-  Bước 7 : Kiểm tra file `backup` được tạo ra theo đường dẫn
+  Bước 7 : Copy file `backup` vừa được tạo tại đường dẫn `/data/backups` sang thư mục `/home/truongtn/data/backup`.
+  Kiểm tra file `backup` vừa được tạo:
   ```
-  sudo ls -l /home/truongtn/data/backups
+  sudo ls -l /data/backups/
   ```
   
-  ![image](https://user-images.githubusercontent.com/80932769/137052742-eaa38f04-988b-45cf-a145-af3c765ab2e1.png)
+  ![image](https://user-images.githubusercontent.com/80932769/137059271-23588136-159e-4510-bc2d-20725f6b792c.png)
+
+  Copy sang thư mục `/home/truongtn/data/backups`:
+  ```
+  sudo cp /data/backups/<file backup> /home/truongtn/data/backups
+  ```
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137059612-3b0d30fb-553c-4bae-8391-0b9796314710.png)
+
+  Bước 8 : Xóa file `backup` tại đường dẫn /data/backups/<tên file>
+  
+  ```
+  sudo rm -rf /data/backups/<tên file>
+  ```
+  
+  
 
   Tới đây ta có đẩy nhưng file `backup` ở các bước trên lên một nền tảng nào khác, đó là lựa chọn của mỗi người.
   Ngoài ra, còn một tùy chọn khá hay đó là việc xóa đi các file `backup` sau một khoảng thời gian được tạo ra.
@@ -118,10 +139,69 @@
   Ở đây thời gian sẽ được tính bằng giây, ta có thể tùy chỉnh thời gian mong muốn tồn tại của mỗi file `backup` sau khoảng thời gian quy định file `backup` sẽ được xóa. Một tính năng cũng khá cần thiết để quản lý bộ nhớ cho server.
   
  
+  ## <a name="restore"></a>2.2 Restore.
+  Quá trình `restore` cơ bản cũng sẽ có 2 bước :
+  - Bước 1 : `restore` dữ liệu của server.
+  - Bước 2 : `restore` những file cấu hình quan trọng của server.
   
+  ### `restore` dữ liệu của server.
+  Bước 1 : Copy file `backup` dữ liệu vào thư mục /data/backups
+  ```
+  sudo cp /home/truong/data/backups/<tên file> /data/backups/
+  ```
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137060270-fe3781ae-3e8c-412f-af1e-2fd84bcfa8d9.png)
+  
+  Bước 2 : Cấp quyền cho `user` git có thể đọc đươc file này.
+  ```
+  sudo chown git.git /data/backups/<tên file>
+  ```
+  Bước 3 : Tạm ừng một số `services` của server.
+  ```
+  sudo gitlab-ctl stop puma
+  sudo gitlab-ctl stop sidekiq
+  ```
+  Sử dụng lệnh để kiểm trạng thái của `services`.
+  ```
+  sudo gitlab-ctl status
+  ```
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137060635-5b82f7d4-9920-4ac0-a567-be33f805784e.png)
+  
+  Bước 4 : Chạy lệnh `restore`.
+  ```
+  sudo gitlab-backup restore BACKUP=<tên file>
+  ```
+  *Lưu ý: <tên file> ở đây chỉ ghi từ đầu tiên tới phiên bản của `GitLab` thôi.
+  VD : 1634093707_2021_10_13_14.3.2_gitlab_backup.tar thì ta sẽ ghi là 1634093707_2021_10_13_14.3.2
+  
+  Quá trình `restore` hệ thống sẽ `untar` file `backup` ra tại folder `/data/backups`.
+  Trong quá trình `restore` hệ thống sẽ có 1 vài thông báo, chỉ cần `yes`.
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137061301-61ad8e67-2f88-461a-b8cf-200af8ce6987.png)
+
+  ![image](https://user-images.githubusercontent.com/80932769/137061331-985ae229-af8e-4bae-9a54-58984e57e208.png)
+  
+  ### `restore` những file cấu hình của server.
+  Bước 1 : Copy 2 file cấu hình ở bước `backup` được lưu tại `/home/truongtn/data/backups` vào thư mục `/etc/gitlab/`
+  ```
+  sudo cp -f /home/truongtn/data/backups/gitlab.rb
+  sudo cp -f /home/truongtn/data/backups/gitlab-secrets.json
+  ```
+  Dùng -f để ghi đè.
+  Bước 2 : Cập nhật lại hệ thống.
+  ```
+  sudo gitlab-ctl reconfigure
+  sudo gitlab-ctl restart
+  ```
+  Để kiểm tra quá trình `restore` diễn ra tốt, dùng lệnh:
+  ```
+  sudo gitlab-rake gitlab:check SANITIZE=true
+  ```
   
 
-  ## <a name="restore"></a>2.2 Restore.
+  
+  
   ## <a name="autoanddrive"></a>2.3 Auto Backup và Backup lên Drive.
   ## <a name="mail"></a>2.4 Mail.
   Đây là tính năng cần thiết mỗi khi thiết lập một `Server`. Khi người dùng được `Admin` cấp cho một tài khoản `GitLab` thì ta sẽ không thể biết được mật khẩu của tài khoản này khi đó `Server` sẽ gửi một `Mail` để ta có thể kích hoạt tài khoản và nhập mật khẩu cho tài khoản hoặc trong trường hợp ta quên mật khẩu và cần reset lại mật khẩu ta cần nhập `Mail` để khôi phục lại mật khẩu.
