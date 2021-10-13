@@ -3,6 +3,8 @@
 
 [Restore.](#restore)
 
+[Auto Backup và Backup lên Drive](#autoanddrive)
+
 [Mail.](#mail)
 
 [< Mục lục.](https://github.com/TNtruong99/GitLab/blob/main/GitLab.md)
@@ -120,7 +122,8 @@
   
 
   ## <a name="restore"></a>2.2 Restore.
-  ## <a name="mail"></a>2.3 Mail.
+  ## <a name="autoanddrive"></a>2.3 Auto Backup và Backup lên Drive.
+  ## <a name="mail"></a>2.4 Mail.
   Đây là tính năng cần thiết mỗi khi thiết lập một `Server`. Khi người dùng được `Admin` cấp cho một tài khoản `GitLab` thì ta sẽ không thể biết được mật khẩu của tài khoản này khi đó `Server` sẽ gửi một `Mail` để ta có thể kích hoạt tài khoản và nhập mật khẩu cho tài khoản hoặc trong trường hợp ta quên mật khẩu và cần reset lại mật khẩu ta cần nhập `Mail` để khôi phục lại mật khẩu.
   
   Bắt đầu cấu hình dịch vụ `Mail` cho `Server`:
