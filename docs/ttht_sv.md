@@ -1,8 +1,11 @@
 # III. Thao tác hệ thống.
-- [Backup.](#backup)
-- [Restore.](#restore)
-- [Mail.](#mail)
-- [< mục lục.](https://github.com/TNtruong99/GitLab/blob/main/GitLab.md)
+[Backup.](#backup)
+
+[Restore.](#restore)
+
+[Mail.](#mail)
+
+[< Mục lục.](https://github.com/TNtruong99/GitLab/blob/main/GitLab.md)
 
 ## 2. Thao tác với Server.
 ### <a name="backup"></a>2.1 Backup.
