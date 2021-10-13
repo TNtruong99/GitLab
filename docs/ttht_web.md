@@ -1,6 +1,8 @@
   # III. Thao tác hệ thống. 
    [Web GitLab](#web)
+   
    [Server](https://github.com/TNtruong99/GitLab/blob/main/docs/ttht_sv.md) 
+   
    [< mục lục](https://github.com/TNtruong99/GitLab/blob/main/GitLab.md)
   ## <a name=web></a> 1. Thao tác với Web GitLab.
   ### 1.1 Sign-up.
