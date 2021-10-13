@@ -18,6 +18,7 @@
   - [2. Thao tác với Server.](https://github.com/TNtruong99/GitLab/blob/main/docs/ttht_sv.md)
     - [2.1 Backup.](https://github.com/TNtruong99/GitLab/blob/main/docs/ttht_sv.md)
     - [2.2 Restore.](https://github.com/TNtruong99/GitLab/blob/main/docs/ttht_sv.md)
+    - [2.3 Auto Backup và Backup lên Drive.](https://github.com/TNtruong99/GitLab/blob/main/docs/ttht_sv.md)
     - [2.3 Mail.](https://github.com/TNtruong99/GitLab/blob/main/docs/ttht_sv.md)
   
 
