@@ -260,10 +260,52 @@
   
   ![image](https://user-images.githubusercontent.com/80932769/137089862-4010410a-9b7e-459c-bd7c-2cee47bbbbe5.png)
 
+  Bước 3 : Đẩy file lên `Google Drive` của tài khoản liên kết.
+  ```
+  sudo rclone <Đường dẫn file> <Tên phiên kết nối>:
+  ```
+  Vd : `sudo rclone /home/truongtn/demo.txt backups:`
   
-    
-    
-    
+  ![image](https://user-images.githubusercontent.com/80932769/137092740-2953ae11-45e6-4f71-997c-f94322811526.png)
+
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137092694-7a33e22e-800e-4e23-bae1-266417df3abc.png)
+  
+  Ngoài ra, `Rclone` còn rất nhiều các câu lệnh hỗ trợ, chi tiết tại đây : [Rclone Command](https://rclone.org/commands/)
+  
+  Để có việc `backup` lên `Google Drive` dễ dàng và tự động ta `Script` và `Cron` hỗ trợ.
+  - [Script](https://github.com/TNtruong99/GitLab/blob/main/docs/scripts.md)
+  - Cron
+  ### Script.
+  Cần setup 1 file `script` để tự động hóa toàn bộ quá trình `backup`, chúng ta sử dụng 1 script dưới dạng file .sh
+  Tạo một file script tại đường dẫn :
+  ```
+  vi /root/backup.sh
+  ```
+  Nhập vào file `script` những dòng lệnh trong link liên kết.
+  Phân quyền cho file backup.sh vừa tạo: sudo chmod +x /root/backup.sh.
+  hạy thử script bằng lệnh `sudo /root/backup.sh`
+  
+  ### Cron.
+  Viết `script` chỉ giúp chúng ta trong quá trình nhập lệnh tuy nhiên để việc `backup` diễn ra theo thời gian mong muốn và tự động thì cần `cron`
+  Bắt đầu với lệnh `systemctl status cron` để kiểm tra tình trạng hoạt động của `cron` thông thường `cron` đã được cài đặt sẵn trên `Ubuntu`. Nếu chưa được cài đặt, hãy tiếp tục sử dụng các lệnh sau để cài đặt `cron`:
+  ```
+  apt-get update && apt-get upgrade
+  dpkg -l cron
+  apt-get install cron
+  ```
+  
+  Thêm một `cron job` cho `Ubuntu`  chỉ cần chỉnh sửa file `/etc/crontab` bằng lệnh:
+  ```
+  sudo vi /etc/crontab
+  ```  
+  Thêm vào dòng lệnh để `cron` tự động chạy `script` theo thời gian lịch trình:
+  ```
+  * * * * * root /root/backup.sh
+  ```
+  Giá trị của mỗi `*` sẽ tương ứng với từng giá trị khác nhau, tham khảo tại đây : [Cron *](https://crontab.guru/)
+  Theo lệnh ở đây thì cứ mỗi 1 phút `cron` sẽ chạy script 1 lần. Thay đổi giá trị của `*` để có được thời gian mong muốn.
+  VD : ` 30 6 * * * root /root/backup.sh` Cứ 6h30p mỗi ngày hệ thống sẽ chạy `script` 1 lần.
 
 
   
