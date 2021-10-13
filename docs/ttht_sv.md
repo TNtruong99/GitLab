@@ -205,6 +205,70 @@
   
   
   ## <a name="autoanddrive"></a>2.3 Auto Backup và Backup lên Drive.
+  Để có thể đẩy file `backup` lên một nền tảng thì ta cần có sự hỗ trợ, trong bài viết này sử dụng `Rclone` là công cụ hỗ trợ đẩy file `backup` lên nền tảng `Google Drive`.
+  
+  Tiến hành các bước sau để có thể `backup` lên `Google Drive`:
+  Bước 1 : Cài đặt `Rclone`.
+  ```
+  cd /root/
+  wget https://downloads.rclone.org/rclone-current-linux-amd64.zip
+  unzip rclone-current-linux-amd64.zip
+  cp rclone-v*-linux-amd64/rclone /usr/sbin/
+  rm -rf rclone-*
+  ```
+  
+  Bước 2 : Tạo kết nối với `Google Drive`.
+  ```
+  rclone config
+  ```
+  Nếu là lần đầu tạo kết nối hệ thống sẽ thông báo *No Remote Found - make a new one * 
+  
+  - Lúc này ta ấn `n` để tạo remote mới.
+  - Hệ thống sẽ yêu cầu nhập tên cho phiên kết nối này : name > <nhập tên của phiên kết nối> 
+    - VD : name> backups 
+    
+    - ![image](https://user-images.githubusercontent.com/80932769/137086918-275098bb-acc8-4c25-a940-3f672f87a1c2.png)
+
+  - Sau khi nhập tên hệ thống sẽ cung cấp một danh sách các dịch vụ hỗ trợ, tìm thứ tự của `Google Drive` tương ứng : Storage > <STT dịch vụ>
+    - VD : Storage > 15
+    
+    - ![image](https://user-images.githubusercontent.com/80932769/137087259-4a68dce1-ab40-4c48-9c13-e6f07abccab3.png)
+
+  - Để trống 2 mục `client_id` và `client_secret`.
+  - Tiếp theo, tại mục `Scope that rclone should use when requesting access from drive` chọn 1 : scope> `1`.
+  - Tiếp tục để trống 2 mục `root_folder_id` và `service_account_file`.
+  - Hệ thống hỏi `Edit advanced config?` chọn `no`.
+  - Hệ thống hỏi `Use auto config?` tiếp tục chọn `no`.
+  - Lúc này `Rclone` sẽ cung cấp cho người dùng một đường link để liên kết với tài khoản bạn mong muốn trở thành tài khoản sẽ liên kết `Google Drive` của tài khoản đó với `Rclone`. `Rclone` sẽ yêu cầu cho phép, hãy cho phép.
+  
+    ![image](https://user-images.githubusercontent.com/80932769/137088647-a5bfe37f-42f0-4fd9-8cd5-15ea382350e7.jpg)
+    
+    Sau khi cho phép, bạn sẽ được cung cấp 1 đoạn mã dùng để nhập vào mục `config_verification_code` tại server `GitLab`. Copy và dán đoạn mã để tiếp tục tiến hành cài đặt.
+  - Sau khi nhập mã, hệ thống sẽ hỏi `Configure this as a team drive?` chọn `n`.
+  - Cuối cùng hệ thống sẽ xác nhận lại các thông tin, chọn `y`.
+  - Chọn `q` để thoát.
+
+  Khi liên kết thành công có thể kiểm tra `Google Drive` của tài khoản liên kết bằng lệnh:
+  ```
+  rclone lsd <tên của phiên remote>:
+  ```
+  VD : `rclone lsd backups:`
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137089738-bc378c11-82d4-436b-a101-272e24914ac8.png)
+
+  `Google Drive` của tài khoản liên kết:
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137089862-4010410a-9b7e-459c-bd7c-2cee47bbbbe5.png)
+
+  
+    
+    
+    
+
+
+  
+  
+  
   ## <a name="mail"></a>2.4 Mail.
   Đây là tính năng cần thiết mỗi khi thiết lập một `Server`. Khi người dùng được `Admin` cấp cho một tài khoản `GitLab` thì ta sẽ không thể biết được mật khẩu của tài khoản này khi đó `Server` sẽ gửi một `Mail` để ta có thể kích hoạt tài khoản và nhập mật khẩu cho tài khoản hoặc trong trường hợp ta quên mật khẩu và cần reset lại mật khẩu ta cần nhập `Mail` để khôi phục lại mật khẩu.
   
