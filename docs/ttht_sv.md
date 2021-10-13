@@ -131,7 +131,7 @@
   
   
 
-  Tới đây ta có đẩy nhưng file `backup` ở các bước trên lên một nền tảng nào khác, đó là lựa chọn của mỗi người.
+  Tới đây ta có thể đẩy những file `backup` ở các bước trên lên một nền tảng nào khác, đó là lựa chọn của mỗi người.
   Ngoài ra, còn một tùy chọn khá hay đó là việc xóa đi các file `backup` sau một khoảng thời gian được tạo ra.
   Ta tùy chỉnh file `/etc/gitlab/gitlab.rb`:
   ```
