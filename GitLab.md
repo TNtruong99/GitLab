@@ -204,6 +204,117 @@ Trong bài hướng dẫn này sử dụng công cụ `VMware` để mô phỏng
   
   ## <a name="ttserver"></a>2. Thao tác với Server.
   ### <a name="ttserver_backup"></a>2.1 Backup.
+  
+  `Backup` là một trong những vấn đề đáng lưu ý nhất khi làm việc vì khi làm việc có thể xảy ra nhiều lỗi gây mất dữ liệu, việc `backup` giúp ta có thể khôi phục lại hệ thống. Khi làm việc với `GitLab` dữ liệu của chúng ta sẽ phình to ra trong quá trình làm việc mà những phân vùng `root` lại thường có sức chứa khá nhỏ. Đó là lý do chúng ta nên chuyển dữ liệu `backup` ra một phân vùng khác cũng rất quan trọng.
+  
+   Để `backup` một server `GitLab` cơ bản có 2 bước chính:
+  - Bước 1 : `backup` những file cấu hình quan trọng của server.
+  - Bước 2 : `backup` dữ liệu của server.
+  
+  #### `Backup` những file cấu hình của server.
+  Bước 1 : Tạo một `folder` tại vị trí mà ta muốn lưu file `backup`.
+  VD: Tạo `folder` **/home/truongtn/data/backups** để lưu dữ liệu tại đây.
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137049348-41ddbd4f-bf22-426c-8e62-33d480ae83d6.png)
+
+  Bước 2 : Sao chép 2 file `gitlab.rb` và gitlab-secrets.json` vào folder đã tạo ở bước trên.
+  ```
+  sudo cp /etc/gitlab/gitlab.rb /home/truongtn/data/backups/
+  sudo cp /etc/gitlab/gitlab-secrets.json /home/truongtn/data/backups/
+  ```
+  Kiểm tra, ta được:
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137051055-01c9e856-9df3-4d4b-8b0d-5b9efdc61d0d.png)
+
+  #### `Backup` dữ liệu của server.
+  Ta sẽ dùng chung folder `backups` của bước trên.
+  Bước 1 : Truy cập vào file `gitlab.rb`.
+  ```
+  sudo vi /etc/gitlab/gitlab.rb
+  ```
+  Bước 2 : Nhấn `/` và nhập `backup` tìm đến vị trí đường dẫn `backup`.
+  ```
+  /backup
+  ```
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137049761-d360aab8-61bc-492b-99f3-a12a1a96a002.png)
+
+  Đây là đường dẫn mặc định của file `backup` việc của chúng ta là thay đổi đường dẫn này đến vị trí folder mà ta đã tạo ở trên.
+  
+  Bước 3 : Thay đổi đường dẫn.
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137049895-08358af0-2cc6-417d-bade-b6512ebb0c59.png)
+
+  Bước 4 : Cập nhật lại hệ thống.
+  ```
+  sudo gitlab-ctl reconfigure
+  ```
+  Bước 5 : Cài gói `rsync` hỗ trợ backup.
+  ```
+  sudo apt-get install rsync
+  ```
+  
+  Bước 6 : Chạy câu lệnh `backup`.
+  Tùy vào phiên bản sử dụng có những câu lệnh khác nhau:
+  - GitLab 12.2 hoặc mới hơn:
+  ```
+  sudo gitlab-backup create
+  ```
+  - GitLab 12.1 và cũ hơn:
+  ```
+  gitlab-rake gitlab:backup:create
+  ```
+  Để kiểm tra phiên bản GitLab sử dụng câu lệnh:
+  ```
+  sudo gitlab-rake gitlab:env:info
+  ```
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137051840-3a6728c6-24ae-47c7-8737-e58c902dfd51.png)
+  
+  `GitLab` cung cấp nhiều tùy chọn để ta có thể chọn trong quá trình `backup` như:
+  - db (database)
+  - uploads (attachments)
+  - builds (CI job output logs)
+  - artifacts (CI job artifacts)
+  - lfs (LFS objects)
+  - registry (Container Registry images)
+  - pages (Pages content)
+  - repositories (Git repositories data)
+  
+  Ta có thể tùy chính để chỉ `backup` những phần mà ta mong muốn bằng cách `skip` qua những cái khác.
+  VD: Ở đây sẽ `backup` toàn bộ trừ `db` và `uploads`.
+  - GitLab 12.2 hoặc mới hơn:
+  ```
+  sudo gitlab-backup create SKIP=db,uploads
+  ```
+  - GitLab 12.1 và cũ hơn:
+  ```
+  sudo -u git -H bundle exec rake gitlab:backup:create SKIP=db,uploads RAILS_ENV=production
+  ```
+  
+  Để tìm hiểu chi tiết, có thể đọc tại : [GitLab backup and restore](https://docs.gitlab.com/ee/raketasks/backup_restore.html)
+  
+  Bước 7 : Kiểm tra file `backup` được tạo ra theo đường dẫn
+  ```
+  sudo ls -l /home/truongtn/data/backups
+  ```
+  
+  ![image](https://user-images.githubusercontent.com/80932769/137052742-eaa38f04-988b-45cf-a145-af3c765ab2e1.png)
+
+  Tới đây ta có đẩy nhưng file `backup` ở các bước trên lên một nền tảng nào khác, đó là lựa chọn của mỗi người.
+  Ngoài ra, còn một tùy chọn khá hay đó là việc xóa đi các file `backup` sau một khoảng thời gian được tạo ra.
+  Ta tùy chỉnh file `/etc/gitlab/gitlab.rb`:
+  ```
+  ## Limit backup lifetime to 7 days - 604800 seconds
+  gitlab_rails['backup_keep_time'] = 604800
+  ```
+  Ở đây thời gian sẽ được tính bằng giây, ta có thể tùy chỉnh thời gian mong muốn tồn tại của mỗi file `backup` sau khoảng thời gian quy định file `backup` sẽ được xóa. Một tính năng cũng khá cần thiết để quản lý bộ nhớ cho server.
+  
+ 
+  
+  
+
+  
   ### <a name="ttserver_backup"></a>2.2 Mail.
   Đây là tính năng cần thiết mỗi khi thiết lập một `Server`. Khi người dùng được `Admin` cấp cho một tài khoản `GitLab` thì ta sẽ không thể biết được mật khẩu của tài khoản này khi đó `Server` sẽ gửi một `Mail` để ta có thể kích hoạt tài khoản và nhập mật khẩu cho tài khoản hoặc trong trường hợp ta quên mật khẩu và cần reset lại mật khẩu ta cần nhập `Mail` để khôi phục lại mật khẩu.
   
