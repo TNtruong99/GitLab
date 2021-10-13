@@ -5,7 +5,7 @@
    
    [< Mục lục](https://github.com/TNtruong99/GitLab/blob/main/GitLab.md)
   ## <a name=web></a> 1. Thao tác với Web GitLab.
-  ### 1.1 Sign-up.
+  ## 1.1 Sign-up.
   Để đảm bảo an toàn cho hệ thống, chúng ta không thể để người ngoài có thể tự đăng kí tài khoản để đăng nhập vào hệ thống.
   Chúng ta cần tắt đi chức năng đăng kí của `server`.
   
