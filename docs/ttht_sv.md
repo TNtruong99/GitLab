@@ -1,6 +1,10 @@
 # III. Thao tác hệ thống.
-## <a name="ttserver"></a>2. Thao tác với Server.
-  ### <a name="ttserver_backup"></a>2.1 Backup.
+- [Backup.](#backup)
+- [Restore.](#restore)
+- [Mail.](#mail)
+
+## 2. Thao tác với Server.
+### <a name="backup"></a>2.1 Backup.
   
   `Backup` là một trong những vấn đề đáng lưu ý nhất khi làm việc vì khi làm việc có thể xảy ra nhiều lỗi gây mất dữ liệu, việc `backup` giúp ta có thể khôi phục lại hệ thống. Khi làm việc với `GitLab` dữ liệu của chúng ta sẽ phình to ra trong quá trình làm việc mà những phân vùng `root` lại thường có sức chứa khá nhỏ. Đó là lý do chúng ta nên chuyển dữ liệu `backup` ra một phân vùng khác cũng rất quan trọng.
   
@@ -111,8 +115,8 @@
   
   
 
-  
-  ### <a name="ttserver_backup"></a>2.2 Mail.
+  ### <a name="restore"></a>2.2 Restore.
+  ### <a name="mail"></a>2.3 Mail.
   Đây là tính năng cần thiết mỗi khi thiết lập một `Server`. Khi người dùng được `Admin` cấp cho một tài khoản `GitLab` thì ta sẽ không thể biết được mật khẩu của tài khoản này khi đó `Server` sẽ gửi một `Mail` để ta có thể kích hoạt tài khoản và nhập mật khẩu cho tài khoản hoặc trong trường hợp ta quên mật khẩu và cần reset lại mật khẩu ta cần nhập `Mail` để khôi phục lại mật khẩu.
   
   Bắt đầu cấu hình dịch vụ `Mail` cho `Server`:
