@@ -158,7 +158,7 @@
   ```
   sudo chown git.git /data/backups/<tên file>
   ```
-  Bước 3 : Tạm ừng một số `services` của server.
+  Bước 3 : Tạm dừng một số `services` của server.
   ```
   sudo gitlab-ctl stop puma
   sudo gitlab-ctl stop sidekiq
