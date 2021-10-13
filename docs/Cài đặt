@@ -1,6 +1,6 @@
+#S
 
-# II. Cài đặt GitLab.
-## <a name="ubuntu"></a>1. Cài đặt GitLab trên Ubuntu.
+## 1. Cài đặt GitLab trên Ubuntu.
 Trong bài hướng dẫn này sử dụng công cụ `VMware` để mô phỏng môi trường cài đặt, và sử dụng phiên bản `Gitlab community edition` (`CE`).
 
   Bước 1: Tải phiên bản `Ubuntu` phù hợp với nhu cầu sử dụng.
