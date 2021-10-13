@@ -36,6 +36,7 @@
   ### `Backup` dữ liệu của server.
   
   Ta sẽ dùng chung folder `backups` của bước trên.
+  
   Bước 1 : Tạo  folder`data` và  `backup` theo đường dẫn data/backups.
   ```
   mkdir -p data/backups
