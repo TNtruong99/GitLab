@@ -187,8 +187,8 @@
   ### `restore` những file cấu hình của server.
   Bước 1 : Copy 2 file cấu hình ở bước `backup` được lưu tại `/home/truongtn/data/backups` vào thư mục `/etc/gitlab/`
   ```
-  sudo cp -f /home/truongtn/data/backups/gitlab.rb
-  sudo cp -f /home/truongtn/data/backups/gitlab-secrets.json
+  sudo cp -f /home/truongtn/data/backups/gitlab.rb /etc/gitlab/
+  sudo cp -f /home/truongtn/data/backups/gitlab-secrets.json /etc/gitlab/
   ```
   Dùng -f để ghi đè.
   Bước 2 : Cập nhật lại hệ thống.
