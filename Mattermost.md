@@ -3,10 +3,10 @@
 - [Khái quát.](#khaiquat)
 - [Tính năng.](#tinhnang)
 
-[II. Cài đặt]
-1. [Cài đặt trên Ubunlu 20.04]
-  - [MySQL Databse Server]
-  - [Mattermost]
+[II. Cài đặt](#caidatmattermost)
+1. [Cài đặt trên Ubunlu 20.04](#caidat)
+    - [MySQL Databse Server](#mysql)
+    - [Mattermost](#mattermost)
 
 ## <a name=mattermost></a> I.Mattermost.
 ### <a name=khaiquat></a>Khái quát.
@@ -30,15 +30,15 @@ Hỗ trợ cả app cài đặt trên điện thoại và các thiết bị di �
 - Cho phép tùy chỉnh thông báo.
 
 
-## <a name=mattermost></a> II.Cài đặt.
-### 1. [Cài đặt trên Ubunlu 20.04]
+## <a name=caidatmattermost></a>II.Cài đặt.
+### <a name=caidat></a> 1. Cài đặt trên Ubunlu 20.04
 Sau khi cài đặt `Ubuntu 20.04` tiến hành cập nhật hệ thống
 ```
 sudo apt update
 sudo apt upgrade
 ```
 
-### MySQL Database Server.
+### <a name=mysql></a>MySQL Database Server.
 Tiến hành cài đặt `MySQL Server`
 Bước 1: Cài `MySQL`
 ```
@@ -71,7 +71,7 @@ Bước 6: Cấp quyền truy cập cho `user` vừa được tạo ở các bư
 grant all privileges on mattermost.* to '<tên user>'@'localhost';
 exit
 ```
-### Mattermost.
+### <a name=mattermost></a>Mattermost.
 Tiến hành cài đặt `Mattermost`.
 Bước 1: Download `Mattermost`.
 ```
@@ -158,4 +158,13 @@ sudo systemctl status mattermost.service
 sudo systemctl start mattermost.service
 sudo systemctl enable mattermost.service
 ```
+Sau khi cài đặt xong đăng nhập vào vào server `Mattermost` thông qua IP của server.
+Server sẽ cho phép tạo `user` và `team` đầu tiên. `User` đầu tiên được tạo được mặc định là `user` admin, có quyền điều khiển hệ thống.
+Mở `System Console` để có thể tùy chỉnh server theo nhu cầu.
+
+![image](https://user-images.githubusercontent.com/80932769/138053639-b6185625-6fe9-4c60-8670-490b30686d9c.png)
+
+![image](https://user-images.githubusercontent.com/80932769/138053681-7c04acad-f7cb-4442-8e32-93f80683c0ba.png)
+
+
 
