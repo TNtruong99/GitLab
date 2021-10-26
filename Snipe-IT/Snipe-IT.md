@@ -302,3 +302,53 @@ Bằng cách đăng nập vào web server của công ty bằng tài khoản đ�
 
 ![image](https://user-images.githubusercontent.com/80932769/138846752-80afbd7e-fbb7-47a1-b64c-42c0e92de296.png)
 
+Restore
+Sử dụng Winscp kết nối tới server
+
+![image](https://user-images.githubusercontent.com/80932769/138865578-c374287c-371c-4803-980a-d102c6f276d3.png)
+
+File backup sau khi được tải về -> tiến hành giải nén.
+
+Có 2 file var và db-dumps 
+
+truy cập file var, ta được /var/www/snipe-it/ có 2 file storage và public 
+
+bên phía server ta cũng truy cập theo đường dẫn /var/www/snipe-it/
+
+tiến hành upload 2 file storage và public ta tải về lên server
+
+![image](https://user-images.githubusercontent.com/80932769/138865722-93c8f3fb-10e6-47fd-82db-9c0cb9aac80a.png)
+
+Với file db_dumps, ta có file mysql-snipe_it.sql . Để đơn giản nhất ta upload file này lên một folder được tạo sẵn tại server để lưu backup, đặt tên folder tùy ý.
+
+![image](https://user-images.githubusercontent.com/80932769/138865803-95a450db-7354-4b49-9dfc-1ecfd29a0761.png)
+
+Ở bài viết ta đặt backups : /root/backups
+mkdir /root/backups
+
+![image](https://user-images.githubusercontent.com/80932769/138864712-f664dc8f-e301-4cc3-885c-40eb657c4da7.png)
+
+Tiến hành restore file backup
+Sử dụng câu lệnh:
+mysql -u [uname] -p [dbname] < [backupfile.sql]
+
+Trong đó:
+[uname] : User của database
+[dbname] : Tên của database
+[backupfile.sql] : Tên file backup đã lưu (file backup muốn phục hồi)
+
+Theo như bài, ta sử dụng câu lệnh: mysql -u snipe_it_user -p snipe_it < mysql-snipe_it.sql
+Sau khi restore lại database
+Ta vào vị trí web server snipe-it
+cd /var/www/snipe-it
+
+Chạy câu lệnh để đảm bảo data được restore.
+php artisan migrate
+Chạy lệnh để xóa cấu hình được lưu trữ.
+php artisan config:clear
+
+![image](https://user-images.githubusercontent.com/80932769/138866133-795430c1-9b1b-4aa0-a13d-fba708f1c203.png)
+
+Thành công server sẽ báo `Nothing to migrate`.
+
+Lên Web Server để kiểm tra.
