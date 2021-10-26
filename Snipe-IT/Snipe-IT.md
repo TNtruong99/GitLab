@@ -2,12 +2,21 @@
 ## Mục lục
 - [Snipe-IT](#snipeit)
   - [Tổng quan.](#tongquan)
-  - [Chức năng.](#chucnang)
 - [Hướng dẫn cài đặt.](#caidat)
+- [Chức năng.](#chucnang)
+  - [Quản lý tài sản.](#qltaisan)
+  - [Backup.](#backup)
 
 
 ## Snipe-IT<a name="snipeit"></a>
 ### Tổng quan.<a name="tongquan"></a>
+`Snipe-IT` là phần mềm mã nguồn mở được dùng để quản lý tài sản công nghệ thông tin. Với phần mềm này sẽ cho phép người quản trị quản lý được laptop được bàn giao cho ai, bao nhiêu phần mềm bản quyền được kích hoạt và còn bao lâu hết hạn,… Ví dụ như phần mềm mà các máy tính nhân viên, máy chủ đang sử dụng (license window, phần mềm bản quyền…) và phần cứng dùng để phục vụ công việc, hệ thống (laptop, màn hình, bàn phím, máy in, thiết bị …) trong môi trường công nghệ thông tin của doanh nghiệp.
+
+`Snipe–IT` được xây dựng trên mã nguồn PHP Framework Laravel, theo sát cấu trúc lập trình MVC. Lợi ích mà Snipe–IT mang lại:
+– Giao diện trực quan, dễ quản lý.
+– Thể hiện tính chuyên nghiệp của một công ty công nghệ.
+– Đưa ra thống kê, kiểm kê tài sản, báo cáo nhanh và chính xác.
+
 
 ## Hướng dẫn cài đặt.<a name="caidat"></a>
 Chuẩn bị :
@@ -180,4 +189,116 @@ Sau khi cài đặt xong thì đây là kết quả.
 
 
 ![image](https://user-images.githubusercontent.com/80932769/138678075-ec1f5ab0-d623-41fe-a889-c053ea99fb65.png)
+
+## Chức năng. <a name="chucnang"></a>
+### Quản lý tài sản. <a name="qltaisan"></a>
+Để quản lý tài sản của một công ty, ta cần có những thông tin cơ bản như :
+- Công ty.
+- Danh mục tài sản.
+- Nhà sản xuất.
+- Nhà cung cấp.
+- Địa điểm.
+- Thành viên.
+- Tài sản.
+### Công ty.
+
+Có thể tạo nhiều công ty dựa theo quy mô và cách tổ chức của công ty cần sử dụng:
+`Setting -> Companies`
+
+Giao diện quản lý công ty.
+
+![image](https://user-images.githubusercontent.com/80932769/138832485-48efbc95-6b78-49cb-b7aa-38e5e7c797b4.png)
+
+Thêm công ty.
+
+![image](https://user-images.githubusercontent.com/80932769/138832336-c53d5dd4-ccfc-445a-9c3c-f2db70f17b36.png)
+
+### Danh mục tài sản.
+Chúng ta xác định tài sản này thuộc về dòng tài sản nào – tùy vào tài sản mà bạn cần quản lý thuộc danh mục nào mà tạo (vd nội ngoại thất, dụng cụ văn phòng, vật liệu xây dựng…), nên sẽ tạo danh mục như sau:
+`Setting -> Categories`
+
+Giao diện quản lý danh mục tài sản.
+
+![image](https://user-images.githubusercontent.com/80932769/138834494-2d340bb3-5468-4c64-9bfb-05d6072a9e55.png)
+
+Giao diện thêm danh mục tài sản.
+
+![image](https://user-images.githubusercontent.com/80932769/138834644-ad6eeacf-f47d-4060-8f90-b3221653f81c.png)
+
+- Category Name : tên danh mục tài sản.
+- Type : loại tài sản. ( Chọn loại tài sản phù hợp.)
+
+### Nhà sản xuất.
+Xác định tài sản thuộc nhà sản xuất nào, tạo danh mục nhà sản xuất:
+`Setting -> Manufacturers`
+
+![image](https://user-images.githubusercontent.com/80932769/138835751-594f3b2a-8a23-486e-8703-8cc0cfd60e36.png)
+
+Giao diện thêm nhà sản xuất.
+
+![image](https://user-images.githubusercontent.com/80932769/138835728-d2a7d1e4-28b6-4bbb-84c8-7c97cfd1c2d6.png)
+
+### Kiểu tài sản.
+Xác định tùy theo các loại thiết bị trong công ty bạn:
+`Setting -> Asset Models`
+
+![image](https://user-images.githubusercontent.com/80932769/138836766-79626435-af89-418c-8870-7689a0cf224d.png)
+
+Giao diện thêm kiểu tài sản.
+
+![image](https://user-images.githubusercontent.com/80932769/138837085-f23d73d0-fb3a-41ce-af6d-44532221dcab.png)
+
+### Nhà cung cấp.
+Xác định tài sản được bên nào cung cấp, tạo danh mục nhà cung cấp:
+`Setting -> Suppliers`
+
+![image](https://user-images.githubusercontent.com/80932769/138839986-cce09a64-2353-40cc-be16-8e0909d9a529.png)
+
+Giao diện thêm nhà cung cấp.
+
+![image](https://user-images.githubusercontent.com/80932769/138839785-aa892192-60af-4356-8c37-6a91e874cdc3.png)
+
+### Địa điểm.
+Xác định đia chỉ công ty bạn, nếu có chi nhánh khác thì tạo thêm, hoặc dạng tập đoàn đứng tên nhiều công ty thì bạn tạo thêm công ty ở phần 1.
+`Setting -> Locations`
+
+![image](https://user-images.githubusercontent.com/80932769/138841155-9b70cf36-0686-45d6-ae10-4abaeee00b01.png)
+
+Giao diện thêm địa điểm của công ty.
+
+![image](https://user-images.githubusercontent.com/80932769/138841127-3c986056-a785-4bea-8aa9-da3b7db86e03.png)
+
+### Thành viên.
+Tạo người dùng để gán tài sản.
+`People`
+
+![image](https://user-images.githubusercontent.com/80932769/138841648-c49e02ef-3805-4bc3-9dd2-f30d23951efe.png)
+
+Giao diện thêm thành viên.
+
+![image](https://user-images.githubusercontent.com/80932769/138841559-553634e6-d916-47bb-84f9-601f8482be92.png)
+
+### Tài sản.
+
+Bắt đầu tạo tài sản dựa theo thông tin đã tạo.
+` Assets -> List All`
+
+![image](https://user-images.githubusercontent.com/80932769/138843541-1dcad130-62ee-43df-8949-ceaf043e3fba.png)
+
+Lưu ý:
+- Thẻ tài sản bạn phải thống nhất theo chuẩn bên kế toán đã lưu để sau này kiểm kê trích xuất dữ liệu cho đồng bộ 2 bên dễ dàng kiểm tra.
+- Kiểu tài sản bạn sẽ thấy có tùy chọn theo các thông tin đã tạo bên trên với logic: danh mục – hãng / kiểu tài sản (còn ở phần cài đặt – kiểu tài sản thì hiển thị sẽ không giống).
+- Tình trạng: thì thường sẽ là ready to deploy do hiện tại chúng ta kiểm kê và nhập liệu cho tài sản đang sử dụng được, khác cái là bạn có check out vào đối tượng nào hay chưa – nếu chưa check out thì xem như đó là hàng tồn kho chờ được cấp, phần này bạn nhập chừng 10 20 thiết bị thì sẽ thấy được. Và bạn có thể tạo thêm nhiều tình trạng tài sản khác tùy theo nhu cầu của bạn tại Cài đặt -> tình trạng nhãn.
+- Check out đến: thì thường bạn sẽ tạo danh sách thành viên cho toàn bộ nhân viên trong công ty rồi check out tài sản theo người dùng, hoặc tùy nhu cầu mà check out theo địa phương.
+- Tên tài sản: ở đây bạn có thể ghi cho đầy đủ thông tin cơ bản của tài sản để nhìn vào biết cơ bản đó là món gì, thông tin này có thể giống nhau giữa các tài sản.
+- Nên có hình ảnh cho từng tài sản để kiểm kê dễ hơn.
+
+![image](https://user-images.githubusercontent.com/80932769/138843484-bf540911-9cd3-4fa3-8e48-34f8ca2c6910.png)
+
+Ngoài tài sản thông thường như bàn, ghế, màn hình, máy in, ... thì Snipe-IT còn hỗ trợ kiểm soát những phần tài sản khác như phần mềm trả phí, phụ kiện, vật tư tiêu hao, ... .
+
+Người dùng khi được cấp tài sản, có thể theo giỏi được toàn bộ thông tin những tài sản mình được cấp.
+Bằng cách đăng nập vào web server của công ty bằng tài khoản được cấp:
+
+![image](https://user-images.githubusercontent.com/80932769/138846752-80afbd7e-fbb7-47a1-b64c-42c0e92de296.png)
 
