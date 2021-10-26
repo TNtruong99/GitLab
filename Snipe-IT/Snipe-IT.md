@@ -105,6 +105,10 @@ APP_URL=null
 APP_TIMEZONE=’UTC'
 ```
 Thay `null` của APP_URL bằng domain của bạn hoặc ip public. Nếu làm trên máy local có thể bỏ qua bước này.
+Tại `TIMEZONE` ta có thể thay bằng múi giờ của Việt Nam để thời gian được chính xác.
+```
+APP_TIMEZONE ='Asia/Ho_Chi_Minh'
+```
 Tại vị trí :
 ```
 DB_DATABASE=null
