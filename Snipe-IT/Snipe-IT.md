@@ -6,6 +6,7 @@
 - [Chức năng.](#chucnang)
   - [Quản lý tài sản.](#qltaisan)
   - [Backup.](#backup)
+  - [Restore.](#restore)
 
 
 ## Snipe-IT<a name="snipeit"></a>
@@ -186,9 +187,13 @@ Sau khi cài đặt xong thì đây là kết quả.
 
 ![image](https://user-images.githubusercontent.com/80932769/138681644-68a43887-7eb5-4b80-b4d1-cc92f63be16a.png)
 
-
-
 ![image](https://user-images.githubusercontent.com/80932769/138678075-ec1f5ab0-d623-41fe-a889-c053ea99fb65.png)
+
+Ngoài ra, Snipe-IT còn hỗ trợ tiếng Việt, hoặc những ngôn ngữ khác và chúng ta hoàn toàn có thể kiểm soát.
+Admin của server có thể chọn ngôn ngữ cho từng tài khoản riêng biệt tùy theo nhu cầu sử dụng.
+Khi tạo `user` mới hoặc tùy chỉnh `user` ta có thể chọn ngôn ngữ cho `user` đó tại mục `Language`. 
+
+![image](https://user-images.githubusercontent.com/80932769/139023874-0be2f0c6-5364-4e24-8b05-df7ef8873c5c.png)
 
 ## Chức năng. <a name="chucnang"></a>
 ### Quản lý tài sản. <a name="qltaisan"></a>
@@ -302,7 +307,25 @@ Bằng cách đăng nập vào web server của công ty bằng tài khoản đ�
 
 ![image](https://user-images.githubusercontent.com/80932769/138846752-80afbd7e-fbb7-47a1-b64c-42c0e92de296.png)
 
-Restore
+### Backup. <a name="backup"></a>
+Snipe-IT hỗ trợ công cụ backup trực tiếp trên web server, rất dễ dàng sử dụng.
+Để có thể backup database của server, ta cần đăng nhập vào web server bằng tài khoản admin.
+Vào phần Setting của tài khoản.
+
+![Setiing](https://user-images.githubusercontent.com/80932769/139022285-f95cdef4-07ac-4eaf-aaab-81d8d88ea90f.png)
+
+Tại đây có công cụ hỗ trợ backup.
+
+![backup](https://user-images.githubusercontent.com/80932769/139022547-4e183586-2f23-4d95-be64-659be937dc42.png)
+
+Sau khi chọn backup, ta sẽ được di chuyển đến giao diên backup của server.
+
+![image](https://user-images.githubusercontent.com/80932769/139022682-7a8736d2-6aed-47d4-bbbf-bf7d8f3dbb08.png)
+
+Để tạo file backup, ta chọn `Generate Backup`. File backup sẽ được tự động tạo với các thông tin như : tên file, ngày, giờ, kích thước file.
+Để có thể tải file backup chỉ cần nhấn vào file backup đã được tạo, file sẽ được tự động tải.
+
+### Restore. <a name="restore"></a>
 Sử dụng Winscp kết nối tới server
 
 ![image](https://user-images.githubusercontent.com/80932769/138865578-c374287c-371c-4803-980a-d102c6f276d3.png)
@@ -352,3 +375,4 @@ php artisan config:clear
 Thành công server sẽ báo `Nothing to migrate`.
 
 Lên Web Server để kiểm tra.
+
